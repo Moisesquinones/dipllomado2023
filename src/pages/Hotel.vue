@@ -1,12 +1,12 @@
 <template>
-  <div class="px-20 pt-10 space-y-5">
+  <div class="md:px-20 px-2  pt-10 space-y-5">
     <button @click="openModal('Nuevo Hotel')"
       class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
       Registrar Nuevo Hotel
     </button>
 
     <Modal :show="modalVisible" @close="closeModal">
-      <FormHotel textTitle="Nuevo" textButton="Guardar" />
+      <FormHotel textTitle="Nuevo" textButton="Guardar"  @close-modal="closeModal" />
     </Modal>
     <TableHotel :hoteles="hoteles" />
   </div>
@@ -25,11 +25,9 @@ const modalTitle = ref('');
 const openModal = (title) => {
   modalTitle.value = title;
   modalVisible.value = true;
-  console.log("Modal abierto");
 };
 
 const closeModal = () => {
   modalVisible.value = false;
-  console.log("Modal cerrado");
 };
 </script>

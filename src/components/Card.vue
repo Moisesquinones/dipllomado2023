@@ -1,16 +1,17 @@
 <template>
-    <div class=" border p-10 rounded-3xl shadow-xl shadow-slate-500
+    <div class="border p-10 rounded-3xl shadow-xl shadow-slate-500
     flex flex-col items-center justify-center font-serif 
     space-y-1 bg-gradient-to-b bg-sky-950 from-purple-400
+    h-full hover:bg-red-400 hover:cursor-pointer
     ">
         <p class="text-2xl">Nit: {{ nit }}</p>
         <h3 class="text-3xl font-bold">{{ nombre }}</h3>
         <p class="text-xl">{{ maxHabitantes }} habitantes</p>
         <div class="mt-4 space-y-2">
-            <img class="rounded-md" :src="imagen" alt="Descripción de la imagen" />
+            <img class="rounded-md w-72 h-72 bg-contain"  :src="imagen" alt="Descripción de la imagen" />
             <div class="grid grid-cols-2 text-white">
-                <p class="text-xl">{{ ciudad }}</p>
-                <p class="text-xl">{{ direccion }}</p>
+                <p class="text-base">{{ ciudad }}</p>
+                <p class="text-base">{{ direccion }}</p>
             </div>
         </div>
     </div>
