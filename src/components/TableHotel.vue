@@ -22,7 +22,6 @@ const closeModalUpdate = () => {
 
 const actualizarTabla = async () => {
   isLoading.value = true;
-  console.log("actualizando tabla desde tabla")
   try {
     const data = await getAll();
     hotelData.value = data.data;

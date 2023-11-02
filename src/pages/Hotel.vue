@@ -41,7 +41,6 @@ const listar = async () => {
   try {
     const data = await getAll();
     hotelData.value = data.data;
-    console.log(data.data)
   } catch (error) {
     console.error('Error al obtener elementos:', error);
   }

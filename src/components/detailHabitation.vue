@@ -1,12 +1,6 @@
 <script setup>
 import { ref, watch } from 'vue';
-
-const hatitationsData = ref([]);
-const modalVisible = ref(false);
-
-watch(hatitationsData, () => {
-  // Puedes agregar lógica de manejo de cambios en hatitationsData aquí
-});
+import Swal from 'sweetalert2';
 
 </script>
 
@@ -65,14 +59,18 @@ watch(hatitationsData, () => {
 
       </div>
     </div>
-
+  
   </div>
 </template>
 
 <script>
+
 export default {
   props: {
     data: Object, // Define 'data' como una propiedad de tipo objeto
   },
+  methods: {
+   
+  }
 };
 </script>
