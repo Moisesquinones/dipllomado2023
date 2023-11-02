@@ -3,14 +3,38 @@
         <div>
             <h1 class="text-2xl font-bold">Diagrama de Habitaciones por ciudad</h1>
         </div>
-        <div class="h-full w-3/5">
+        <div class="w-[300px] h-[400px] md:w-[600px] md:h-[500px] flex items-center justify-center">
             <HabitacionChart :hoteles="hoteles"></HabitacionChart>
         </div>
     </div>
 </template>
   
-<script setup>
-import HabitacionChart from '../components/HabitacionChart.vue'
-import hoteles from '../data/hoteles'
+<script>
+import HabitacionChart from '../components/HabitacionChart.vue';
+import { ref, onMounted } from 'vue';
+import { getAll } from '../services/hotels';
+
+export default {
+    setup() {
+        const hoteles = ref([]);
+
+        onMounted(async () => {
+            try {
+                const response = await getAll();
+                if (response.data) {
+                    hoteles.value = response.data;
+                }
+            } catch (error) {
+                console.error('Error al obtener los datos de los hoteles', error);
+            }
+        });
+
+        return {
+            hoteles,
+        };
+    },
+    components: { HabitacionChart }
+
+};
 </script>
   

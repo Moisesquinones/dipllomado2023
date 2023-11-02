@@ -6,21 +6,26 @@
     </button>
 
     <Modal :show="modalVisible" @close="closeModal">
-      <FormHotel textTitle="Nuevo" textButton="Guardar"  @close-modal="closeModal" />
+      <FormHotel textTitle="Nuevo" textButton="Guardar" @close-modal="closeModal" @hotel-creado="actualizarTabla" />
     </Modal>
-    <TableHotel :hoteles="hoteles" />
-  </div>
+
+    <TableHotel :hotelData="hotelData" :key="tablaKey" @hotel-actualizado="actualizarTabla" />
+
+</div>
 </template>
 
 <script setup>
-import TableHotel from '../components/TableHotel.vue';
-import Modal from '../components/Modal.vue';
+import { onMounted, ref } from 'vue';
 import FormHotel from '../components/FormHotel.vue';
-import { ref } from 'vue';
-import hoteles from '../data/hoteles'
+import Modal from '../components/Modal.vue';
+import TableHotel from '../components/TableHotel.vue';
+import { getAll } from '../services/hotels';
 
+const tablaKey = ref(0); 
+const hotelData = ref([]);
 const modalVisible = ref(false);
 const modalTitle = ref('');
+const isLoading = ref(true);
 
 const openModal = (title) => {
   modalTitle.value = title;
@@ -30,4 +35,24 @@ const openModal = (title) => {
 const closeModal = () => {
   modalVisible.value = false;
 };
+
+const listar = async () => {
+  isLoading.value = true;
+  try {
+    const data = await getAll();
+    hotelData.value = data.data;
+    console.log(data.data)
+  } catch (error) {
+    console.error('Error al obtener elementos:', error);
+  }
+  isLoading.value = false;
+};
+
+const actualizarTabla = () => {
+  tablaKey.value += 1;
+  listar();
+  onMounted(listar);
+};
+
+onMounted(listar);
 </script>
